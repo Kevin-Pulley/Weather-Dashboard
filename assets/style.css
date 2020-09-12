@@ -1,0 +1,23 @@
+
+
+body {
+    background-image: url("weather.jpg");
+};
+
+
+
+
+#forecast {
+    position: absolute;
+
+}
+
+h1 {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: red;
+}
+#current {
+    border:red;
+}

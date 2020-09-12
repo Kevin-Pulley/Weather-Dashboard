@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>Weather Dashboard</h1>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-lg-3 bg-light">
+                <h5 class="mt-1">Search for a City:</h5>
+                <div class="form-inline form-group">
+                    <input class="form-control" type="text" id="search-bar" />
+                    <button class="btn btn-primary" id="search-button"> <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+                ​<div class="list-group" id="city-history"></div>
+
+
+                <div>
+                    <button id="clear">CLEAR ALL</button>
+                </div>
+            </aside>
+            ​
+            <div class="col-lg-9">
+                <div id="current" class="mt-3"></div>
+                <div id="forecast" class="card-deck mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!---> <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="assets/script.js"></script>
+
+</html>
