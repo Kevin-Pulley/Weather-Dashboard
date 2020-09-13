@@ -1,6 +1,6 @@
 
-
-
+//let today = new Date();
+//let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
 let cityList = [];
 let cityName;
 let APIKey = "301339bb021118c7cbc90eb9f34609ff";
@@ -21,7 +21,7 @@ initCityList();
 function callAPI() {
 
     let cityText = $("#search-bar").val();
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityText + "&appid=301339bb021118c7cbc90eb9f34609ff"
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityText + "&units=imperial&appid=301339bb021118c7cbc90eb9f34609ff"
 
 
     $.ajax({
@@ -33,39 +33,46 @@ function callAPI() {
         <div class="card">
   <div class="card-body">
   <h2>${cityText}</h2>
-  Current windspeed is <p>${response.wind.speed}</p>
+  <p>Current Temperature is: ${response.main.temp}</p>
+  <p>Current Humidity is: ${response.main.humidity}</p>
+  <p>Current Wind Speed is: ${response.wind.speed}</p>
+  <p>Current UV Index is ${response.wind.speed}</p>
   </div>
   </div>`;
-  currentForecast.html(str)
-});
+        currentForecast.html(str)
+    });
 
-let queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityText + "&appid=301339bb021118c7cbc90eb9f34609ff"
+    let queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityText + "&units=imperial&appid=301339bb021118c7cbc90eb9f34609ff"
 
 
-$.ajax({
-    url: queryURLForecast,
-    method: "GET"
-}).then(function (response) {
-    console.log(response)
+    $.ajax({
+        url: queryURLForecast,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response)
 
-    for (i = 0; i < response.list.length; i++) {
-        if(i % 8 === 0){
-            console.log(i)
-            let template = `  <div class="card">
-            <img src="..." class="card-img-top" alt="...">
+        for (i = 0; i < response.list.length; i++) {
+            if (i % 8 === 0) {
+                console.log(i)
+                let template = `  <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            
+            <h5 class="card-title">${cityText + " " + "(" + response.list[i].dt_txt + ")" }</h5>
+            <p class="card-text">Temperature:${response.list[i].main.temp}</p>
+            <p class="card-text">Humidity:${response.list[i].main.humidity}</p>
             <p class="card-text">Wind Speed:${response.list[i].wind.speed}</p>
             
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
             </div>`
-            
-            $("#forecast").append(template);
-        }
-        
-        //template.empty();
-            
+            //<img src="http://openweathermap.org/img/w/" + ${response.list[i].weather.icon}+ ".png" >
+            //$("<img>").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
+                $("#forecast").append(template);
+                //let icon = $("<img>").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
+                //console.log(icon)
+            }
+
+            //template.empty();
+
         }
     });
 
