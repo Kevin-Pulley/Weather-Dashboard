@@ -1,6 +1,5 @@
 
-//let today = new Date();
-//let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+
 let cityList = [];
 let cityName;
 let APIKey = "301339bb021118c7cbc90eb9f34609ff";
@@ -15,7 +14,8 @@ let fiveDay = ("#forecast");
 //localStorage.clear();
 
 initCityList();
-
+history.push(localStorage)
+console.log(history)
 //searchBar.value = localStorage.getItem("cityList");
 
 function callAPI() {
@@ -32,7 +32,7 @@ function callAPI() {
         let str = `
         <div class="card">
   <div class="card-body">
-  <h2>${cityText}</h2>
+  <h2>${cityText}</h2> 
   <p>Current Temperature is: ${response.main.temp}</p>
   <p>Current Humidity is: ${response.main.humidity}</p>
   <p>Current Wind Speed is: ${response.wind.speed}</p>
@@ -56,31 +56,22 @@ function callAPI() {
                 console.log(i)
                 let template = `  <div class="card">
             <div class="card-body">
-            
-            <h5 class="card-title">${cityText + " " + "(" + response.list[i].dt_txt + ")" }</h5>
+            <img src="http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png" >
+            <h5 class="card-title">${cityText}</h5>
+            <h5 class="card-text">${response.list[i].dt_txt}</h5>
             <p class="card-text">Temperature:${response.list[i].main.temp}</p>
             <p class="card-text">Humidity:${response.list[i].main.humidity}</p>
             <p class="card-text">Wind Speed:${response.list[i].wind.speed}</p>
             
             </div>
             </div>`
-            //<img src="http://openweathermap.org/img/w/" + ${response.list[i].weather.icon}+ ".png" >
-            //$("<img>").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
+
                 $("#forecast").append(template);
-                //let icon = $("<img>").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
-                //console.log(icon)
+
             }
-
-            //template.empty();
-
         }
     });
-
 }
-
-
-
-
 
 
 $("#search-button").click("submit", function (event) {
@@ -111,6 +102,7 @@ function renderCities() {
         a.text(b);
         $("#city-history").prepend(a)
     }
+    
 };
 
 
@@ -118,15 +110,18 @@ function initCityList() {
     let storedCities = JSON.parse(localStorage.getItem(cityList));
     if (storedCities !== null) {
         cityList = storedCities;
+        
     }
-    //localStorage.setItem("cityList", JSON.parse(cityList))
+   //cityList.push(history)
     renderCities();
+
 };
 
 
 function saveCity() {
     let cityText = $("#search-bar").attr("id");
-    localStorage.setItem(cityText, JSON.stringify(cityList));
+    localStorage.setItem(cityList, JSON.stringify(cityList));
+
     //console.log(localStorage)
 
 };
